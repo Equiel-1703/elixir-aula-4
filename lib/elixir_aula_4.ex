@@ -67,4 +67,44 @@ defmodule Aula4 do
     end
   end
 
+  def neg_lista([]), do: []
+
+  def neg_lista([h | l]) do
+    if is_boolean(h) do
+      [!h | neg_lista(l)]
+    else
+      raise("Essa função só trabalha com booleanos!")
+    end
+  end
+
+  def join([], []), do: []
+
+  def join([], [h_2 | t_2]) do
+    [h_2 | join([], t_2)]
+  end
+
+  def join([h_1 | t_1], list_2) do
+    if is_list(list_2) do
+      [h_1 | join(t_1, list_2)]
+    else
+      raise("Você precisa fornecer duas listas para a função join/2!")
+    end
+  end
+
+  def concat_lista([]), do: []
+
+  def concat_lista([h_l | t_l]) do
+    try do
+      join(h_l, concat_lista(t_l))
+    rescue
+      _ in _ ->
+        join([h_l], concat_lista(t_l))
+    end
+  end
+
+  def inverte_lista([]), do: []
+
+  def inverte_lista([h | t]) do
+    inverte_lista(t) ++ [h]
+  end
 end
